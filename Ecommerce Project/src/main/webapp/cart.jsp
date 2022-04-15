@@ -4,6 +4,7 @@
 <%@page import="ecommerce.project.model.*"%>
 <%@page import="java.util.*"%>
 <%@page import="ecommerce.project.dao.ProductDao"%>
+<%@page import="ecommerce.project.servlet.*"%>
 
 <%
 User auth = (User) request.getSession().getAttribute("auth");
@@ -16,7 +17,9 @@ List<Cart> cartProduct = null;
 if (cart_list != null) {
 	ProductDao pDao = new ProductDao(DbCon.getConnection());
 	cartProduct = pDao.getCartProducts(cart_list);
+	double total = pDao.getTotalCartPrice(cart_list);
 	request.setAttribute("cart_list", cart_list);
+	request.setAttribute("total", total);
 }
 %>
 <!DOCTYPE html>
@@ -35,7 +38,7 @@ font-size: 18px;
 
 	<div class="container">
 		<div class="d-flex py-3">
-			<h3>Total Price: $109.99</h3>
+			<h3>Total Price: $ ${  (total > 0)? total:0}</h3>
 			<a class="mx-3 btn-primary" href="">Check Out</a>
 		</div>
 		<table class="table table-loght">
@@ -57,11 +60,11 @@ font-size: 18px;
 						<form action="" method="post" class="form-inline">
 							<input type="hidden" name="id" value="<%= c.getId() %>" class="form-input">
 							<div class="form-group d-flex" style="min-width:100px; max-width:200px">
-								<a class="btn btn-sm btn-decre" href=""> <i
+								<a class="btn btn-sm btn-decre" href="quantity-inc-dec?action=dec&id=<%=c.getId()%>"> <i
 									class="fas fa-minus-square"></i>
 								</a> <input type="text" name="quantity" class="form-control" style="text-align:center "
-									value="1" readonly> <a class="btn btn-sm btn-incre"
-									href=""> <i class="fas fa-plus-square"></i>
+									value="<%= c.getQuantity() %>" readonly> <a class="btn btn-sm btn-incre"
+									href="quantity-inc-dec?action=inc&id=<%=c.getId()%>"> <i class="fas fa-plus-square"></i>
 								</a>
 
 							</div>
