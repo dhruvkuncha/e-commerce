@@ -46,9 +46,10 @@ public class QuantityServlet extends HttpServlet {
 					for(Cart c:cart_list) {
 						if(c.getId() == id) {
 							int quantity = c.getQuantity();
-							if(quantity > 0) {
+							if(quantity > 1) {
 								quantity--;
 							}
+							
 							
 							c.setQuantity(quantity);
 							response.sendRedirect("cart.jsp");

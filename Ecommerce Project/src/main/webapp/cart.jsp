@@ -5,8 +5,12 @@
 <%@page import="java.util.*"%>
 <%@page import="ecommerce.project.dao.ProductDao"%>
 <%@page import="ecommerce.project.servlet.*"%>
+<%@page import="java.text.DecimalFormat"%>
 
 <%
+
+DecimalFormat df = new DecimalFormat("#.##");
+request.setAttribute("df", df);
 User auth = (User) request.getSession().getAttribute("auth");
 if (auth != null) {
 	request.setAttribute("auth", auth);
@@ -38,8 +42,8 @@ font-size: 18px;
 
 	<div class="container">
 		<div class="d-flex py-3">
-			<h3>Total Price: $ ${  (total > 0)? total:0}</h3>
-			<a class="mx-3 btn-primary" href="">Check Out</a>
+			<h3>Total Price: $ ${  (total > 0)? df.format(total):0}</h3>
+			<a class="mx-3 btn-primary" href="cart-check-out">Check Out</a>
 		</div>
 		<table class="table table-loght">
 			<thead style="font-weight:bold">
@@ -55,9 +59,9 @@ font-size: 18px;
 					<tr>
 					<td><%=c.getName()%></td>
 					<td><%=c.getRating()%></td>
-					<td><%=c.getPrice()%></td>
+					<td><%=df.format(c.getPrice())%></td>
 					<td>
-						<form action="" method="post" class="form-inline">
+						<form action="buy-now" method="post" class="form-inline">
 							<input type="hidden" name="id" value="<%= c.getId() %>" class="form-input">
 							<div class="form-group d-flex" style="min-width:100px; max-width:200px">
 								<a class="btn btn-sm btn-decre" href="quantity-inc-dec?action=dec&id=<%=c.getId()%>"> <i
@@ -66,12 +70,15 @@ font-size: 18px;
 									value="<%= c.getQuantity() %>" readonly> <a class="btn btn-sm btn-incre"
 									href="quantity-inc-dec?action=inc&id=<%=c.getId()%>"> <i class="fas fa-plus-square"></i>
 								</a>
+								
+								<button type="submit" class="btn btn-primary btn-sm" >Buy</button>
 
 							</div>
+							
 
 						</form>
 					</td>
-					<td><a class="btn btn-btn-sm btn-danger" href="">Remove
+					<td><a class="btn btn-btn-sm btn-danger" href="remove-from-cart?id=<%=c.getId()%>">Remove
 							From Cart</a></td>
 				</tr>
 					

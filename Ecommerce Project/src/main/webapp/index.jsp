@@ -43,7 +43,7 @@ if (cart_list != null) {
 						<h6 class="rating"><%= p.getRating() %></h6>
 						<div class="mt-auto d-flex justify-content-between">
 							<a href="add-to-cart?id=<%= p.getId() %>" class="btn btn-dark">Add to Cart</a> 
-							<a href="#"	class="btn btn-primary">Buy Now</a>
+							<a href="buy-now?quantity=1&id=<%=p.getId() %>"	class="btn btn-primary">Buy Now</a>
 						</div>
 
 					</div>
