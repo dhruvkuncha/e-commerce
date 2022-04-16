@@ -3,6 +3,7 @@ package ecommerce.project.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +45,7 @@ public class OrderDao {
 		List<Order> list = new ArrayList<>();
 		
 		try {
-			query = "select * from orders where u_id? orderby orders.o_id desc";
+			query = "select * from orders where u_id=? order by orders.o_id desc";
 			pst = this.con.prepareStatement(query);
 			pst.setInt(1, id);
 			rs = pst.executeQuery();
@@ -71,5 +72,20 @@ public class OrderDao {
 		}
 		return list;
 	}
+	public void cancelOrder(int id) {
+       
+        try {
+            query = "delete from orders where o_id=?";
+            pst = this.con.prepareStatement(query);
+            pst.setInt(1, id);
+            pst.execute();
+          
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.print(e.getMessage());
+        }
+       
+    }
+	
 
 }
