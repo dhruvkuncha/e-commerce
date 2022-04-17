@@ -42,6 +42,29 @@ public class UserDao {
 		}
 		return user;
 	}
+	public boolean userRegister(User user) {
+		Boolean set = false;
+		
+		try {
+			query = "INSERT INTO users(name,email,password) VALUES(?,?,?)";
+			pst = this.con.prepareStatement(query);
+			pst.setString(1,  user.getName());
+			pst.setString(2,  user.getEmail());
+			pst.setString(3, user.getPassword());
+			pst.execute();
+			
+			set = true;
+			
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+			System.out.print(e.getMessage());
+		}
+		return set;
+		
+	}
+	
+	
 	
 	
 	
