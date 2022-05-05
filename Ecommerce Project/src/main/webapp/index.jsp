@@ -29,13 +29,13 @@ if (cart_list != null) {
 
 	<div class="container">
 		<div class="card-header-my-3">Products</div>
-		<div class="row">
+		<div class="row d-flex justify-content-center ">
 		<%
 		if(!products.isEmpty()){
 			for(Product p : products){ 
 		 %>
-				<div class='my-3 col-md-6 col-lg-4 d-flex justify-content-center'>
-				<div class="card mw-100" style="width: 18rem;">
+				<div class='col-lg-3 col-md-6 mb-5 d-flex justify-content-center mx-2 shadow' >
+				<div class="card mw-100" style="width: 18rem; border:transparent" >
 					<img class="card-img-top embed-responsive-item" style=" object-fit: contain; max-height: 20vh;" src="<%= p.getImage() %>" alt="Card image cap">
 					<div class="card-body d-flex flex-column">
 						<h5 class="card-title"><%= p.getName() %></h5>
@@ -49,6 +49,7 @@ if (cart_list != null) {
 					</div>
 				</div>
 			</div>
+			
 		<% 	}
 		}
 		%>

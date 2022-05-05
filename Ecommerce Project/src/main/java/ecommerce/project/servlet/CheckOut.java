@@ -38,6 +38,10 @@ public class CheckOut extends HttpServlet {
 			Date date = new Date();
 			ArrayList<Cart> cart_list = (ArrayList<Cart>) request.getSession().getAttribute("cart-list");
 			User auth = (User) request.getSession().getAttribute("auth");
+			String address = (String) request.getParameter("address");
+			String city = (String) request.getParameter("city");
+			String state = (String) request.getParameter("state");
+			String zip = (String) request.getParameter("zip");
 			
 			if(cart_list != null && auth != null) {
 				
@@ -46,6 +50,10 @@ public class CheckOut extends HttpServlet {
 					order.setId(c.getId());
 					order.setUid(auth.getId());
 					order.setQuantity(c.getQuantity());
+					order.setAddress(address);
+					order.setCity(city);
+					order.setState(state);
+					order.setZip(zip);
 					order.setDate(formatter.format(date));
 					
 					OrderDao o_dao = new OrderDao(DbCon.getConnection());

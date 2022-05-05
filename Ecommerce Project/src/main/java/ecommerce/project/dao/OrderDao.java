@@ -27,12 +27,16 @@ public class OrderDao {
 		boolean result = false;
 		
 		try {
-			query = "insert into orders(p_id, u_id, quantity, date) values(?,?,?,?)";
+			query = "insert into orders(p_id, u_id, quantity, address, city, state, zip, date) values(?,?,?,?,?,?,?,?)";
 			pst = this.con.prepareStatement(query);
 			pst.setInt(1, model.getId());
 			pst.setInt(2, model.getUid());
 			pst.setInt(3, model.getQuantity());
-			pst.setString(4, model.getDate());
+			pst.setString(4, model.getAddress());
+			pst.setString(5, model.getCity());
+			pst.setString(6, model.getState());
+			pst.setString(7, model.getZip());
+			pst.setString(8, model.getDate());
 			pst.executeUpdate();
 			result = true;
 			

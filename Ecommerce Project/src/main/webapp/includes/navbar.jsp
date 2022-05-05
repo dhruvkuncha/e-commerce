@@ -21,6 +21,9 @@
           <li class="nav-item">
             <a class="nav-link" href="log-out">Logout</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="account.jsp">My Account</a>
+          </li>
         <%
         }
         else{
