@@ -140,7 +140,7 @@ public class UserDao {
 		
 	}
 	
-	public boolean cardUpdate(User user) {
+	public boolean cardUpdate(User user, String cNo) {
 		Boolean set = false;
 		
 		try {
@@ -151,7 +151,7 @@ public class UserDao {
 			pst.setString(3,  user.getValidThrough());
 			pst.setString(4, user.getCvv());
 			pst.setDouble(5, user.getCreditBalance());		
-			//pst.setString(6, cId);
+			pst.setInt(6, Integer.parseInt(cNo));
 			pst.execute();
 			
 			set = true;

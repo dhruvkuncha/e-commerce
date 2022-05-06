@@ -3,7 +3,7 @@
 <%@page import="ecommerce.project.connection.DbCon"%>
 <%@page import="ecommerce.project.model.*"%>
 <%@page import="java.util.*"%>
-<%@page import="ecommerce.project.dao.ProductDao"%>
+<%@page import="ecommerce.project.dao.*"%>
 <%@page import="ecommerce.project.servlet.*"%>
 <%@page import="java.text.DecimalFormat"%>
 
@@ -16,6 +16,9 @@ if (auth != null) {
 }
 
 ArrayList<Cart> cart_list = (ArrayList<Cart>) session.getAttribute("cart-list");
+UserDao udao = new UserDao(DbCon.getConnection());
+List<User> add = udao.getAllAddress(auth.getId());
+List<User> cards = udao.getAllCards(auth.getId());
 List<Cart> cartProduct = null;
 if (cart_list != null) {
 	ProductDao pDao = new ProductDao(DbCon.getConnection());
@@ -39,7 +42,7 @@ if (cart_list != null) {
 	<div class="container">
 		<div class="d-flex py-3">
 			<h3>Total Price: $ ${  (total > 0)? df.format(total):0}</h3>
-			
+
 		</div>
 		<table class="table table-loght">
 			<thead style="font-weight: bold">
@@ -74,7 +77,7 @@ if (cart_list != null) {
 									class="fas fa-plus-square"></i>
 								</a>
 
-								
+
 
 							</div>
 
@@ -100,9 +103,29 @@ if (cart_list != null) {
 				<div class="container">
 					<form action="cart-check-out">
 
+
 						<div class="row">
 							<div class="col-50">
 								<h3>Billing Address</h3>
+
+								<div class="row">
+									<div class="col-50 mb-3">
+										<label for="add">Select Address</label> <select name="add"
+											id="input-address">
+											<option name="Add New">Add New</option>
+											<%
+											for (User a : add) {
+											%>
+
+
+											<option name="existing"><%=a.getAddress()%></option>
+
+											<%
+											}
+											%>
+										</select>
+									</div>
+								</div>
 								<label for="fname"><i class="fa fa-user"></i> Full Name</label>
 								<input type="text" id="fname" name="firstname"
 									placeholder="John M. Doe"> <label for="email"><i
@@ -113,6 +136,8 @@ if (cart_list != null) {
 									placeholder="542 W. 15th Street"> <label for="city"><i
 									class="fa fa-institution"></i> City</label> <input type="text"
 									id="city" name="city" placeholder="New York">
+
+
 
 								<div class="row">
 									<div class="col-50">
@@ -134,6 +159,24 @@ if (cart_list != null) {
 										class="fa fa-cc-amex" style="color: blue;"></i> <i
 										class="fa fa-cc-mastercard" style="color: red;"></i> <i
 										class="fa fa-cc-discover" style="color: orange;"></i>
+								</div>
+								<div class="row">
+									<div class="col-50 mb-3">
+										<label for="mode">Select Card</label> <select name="mode"
+											id="input-address">
+											<option name="Add New">Add New</option>
+											<%
+											for (User a : cards) {
+											%>
+
+
+											<option name="existing" value=<%=a.getcNo() %>><%=a.getcName() + "'s card" %></option>
+
+											<%
+											}
+											%>
+										</select>
+									</div>
 								</div>
 								<label for="cname">Name on Card</label> <input type="text"
 									id="cname" name="cardname" placeholder="John More Doe">
@@ -170,18 +213,18 @@ if (cart_list != null) {
 						</span>
 					</h4>
 					<%
-				if (cart_list != null) {
-					for (Cart c : cartProduct) {
-				%>
+					if (cart_list != null) {
+						for (Cart c : cartProduct) {
+					%>
 					<p>
 						<a href="#"><%=c.getName()%></a><span class="price"><%=df.format(c.getPrice())%></span>
 					</p>
-					
+
 					<hr>
 					<%
-				}
-				}
-				%>
+					}
+					}
+					%>
 					<p>
 						Total <span class="price" style="color: black"><b>$ ${  (total > 0)? df.format(total):0}</b></span>
 					</p>

@@ -68,7 +68,8 @@ public class payment extends HttpServlet {
 					request.setAttribute("message", message);
 					response.sendRedirect("account.jsp");
 				}
-				if (!action.equals("Add New") && ud.cardUpdate(userModel)) {
+				if (!action.equals("Add New") && ud.cardUpdate(userModel, action)) {
+					System.out.println(action);
 
 					response.sendRedirect("account.jsp");
 				}

@@ -1,12 +1,14 @@
 package ecommerce.project.servlet;
 
 import java.io.IOException;
+
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
 import javax.servlet.ServletException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -38,23 +40,28 @@ public class CheckOut extends HttpServlet {
 			Date date = new Date();
 			ArrayList<Cart> cart_list = (ArrayList<Cart>) request.getSession().getAttribute("cart-list");
 			User auth = (User) request.getSession().getAttribute("auth");
-			String address = (String) request.getParameter("address");
-			String city = (String) request.getParameter("city");
-			String state = (String) request.getParameter("state");
-			String zip = (String) request.getParameter("zip");
+			String address = request.getParameter("add");
+			int cNo = Integer.parseInt(request.getParameter("mode"));
+			
+			
+			
 			
 			if(cart_list != null && auth != null) {
+				OrderDao od = new OrderDao(DbCon.getConnection());
+				User a = od.getCard(cNo);
+				User u = od.getAddress(address);
+				
+				
 				
 				for(Cart c:cart_list) {
 					Order order = new Order();
 					order.setId(c.getId());
 					order.setUid(auth.getId());
 					order.setQuantity(c.getQuantity());
-					order.setAddress(address);
-					order.setCity(city);
-					order.setState(state);
-					order.setZip(zip);
+					order.setaId(u.getaId());
+					order.setcId(a.getcId());
 					order.setDate(formatter.format(date));
+					
 					
 					OrderDao o_dao = new OrderDao(DbCon.getConnection());
 					boolean result = o_dao.insertOrder(order);

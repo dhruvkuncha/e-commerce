@@ -4,10 +4,8 @@ public class Order extends Product{
 	private int orderId;
 	private int uid;
 	private int quantity;
-	private String address;
-	private String city;
-	private String state;
-	private String zip;
+	private int aId;
+	private int cId;
 	private String date;
 	
 	
@@ -70,37 +68,23 @@ public class Order extends Product{
 		return super.toString();
 	}
 
-	public String getAddress() {
-		return address;
+	public int getaId() {
+		return aId;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
+	public void setaId(int aId) {
+		this.aId = aId;
 	}
 
-	public String getCity() {
-		return city;
+	public int getcId() {
+		return cId;
 	}
 
-	public void setCity(String city) {
-		this.city = city;
+	public void setcId(int cId) {
+		this.cId = cId;
 	}
 
-	public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public String getZip() {
-		return zip;
-	}
-
-	public void setZip(String zip) {
-		this.zip = zip;
-	}
+	
 	
 	
 

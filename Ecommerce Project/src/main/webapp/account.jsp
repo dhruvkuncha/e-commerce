@@ -20,6 +20,7 @@ String msg = "";
 UserDao udao = new UserDao(DbCon.getConnection());
 List<User> cards = udao.getAllCards(auth.getId());
 List<User> add = udao.getAllAddress(auth.getId());
+//User m = add.get(0);
 %>
 <!DOCTYPE html>
 <html>
@@ -46,17 +47,7 @@ List<User> add = udao.getAllAddress(auth.getId());
 					class="h4 mb-0 text-white text-uppercase d-none d-lg-inline-block"
 					href="index.jsp" target="_blank">Ecommerce Project</a>
 				<!-- Form -->
-				<form
-					class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
-					<div class="form-group mb-0">
-						<div class="input-group input-group-alternative">
-							<div class="input-group-prepend">
-								<span class="input-group-text"><i class="fas fa-search"></i></span>
-							</div>
-							<input class="form-control" placeholder="Search" type="text">
-						</div>
-					</div>
-				</form>
+
 				<!-- User -->
 				<ul class="navbar-nav align-items-center d-none d-md-flex">
 					<li class="nav-item dropdown"><a class="nav-link pr-0"
@@ -72,24 +63,61 @@ List<User> add = udao.getAllAddress(auth.getId());
 								</div>
 							</div>
 					</a>
-						<div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
-							<div class=" dropdown-header noti-title">
-								<h6 class="text-overflow m-0">Welcome!</h6>
+					<li class="nav-item dropdown"><a class="nav-link pr-0"
+						href="cart.jsp" role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false">
+							<div class="media align-items-center">
+							
+								<div class="media-body ml-2 d-none d-lg-block">
+								
+									<span class="mb-0 text-sm  font-weight-bold">Cart<span class="badge bg-danger">${cart_list.size()}</span></span>
+								</div>
 							</div>
-							<a href="../examples/profile.html" class="dropdown-item"> <i
-								class="ni ni-single-02"></i> <span>My profile</span>
-							</a> <a href="../examples/profile.html" class="dropdown-item"> <i
-								class="ni ni-settings-gear-65"></i> <span>Settings</span>
-							</a> <a href="../examples/profile.html" class="dropdown-item"> <i
-								class="ni ni-calendar-grid-58"></i> <span>Activity</span>
-							</a> <a href="../examples/profile.html" class="dropdown-item"> <i
-								class="ni ni-support-16"></i> <span>Support</span>
-							</a>
-							<div class="dropdown-divider"></div>
-							<a href="#!" class="dropdown-item"> <i class="ni ni-user-run"></i>
-								<span>Logout</span>
-							</a>
-						</div></li>
+					</a>
+					
+					</li>
+					
+					</li>
+					
+					<li class="nav-item dropdown"><a class="nav-link pr-0"
+						href="index.jsp" role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false">
+							<div class="media align-items-center">
+							
+								<div class="media-body ml-2 d-none d-lg-block">
+								
+									<span class="mb-0 text-sm  font-weight-bold">Home</span>
+								</div>
+							</div>
+					</a>
+					
+					</li>
+					<li class="nav-item dropdown"><a class="nav-link pr-0"
+						href="orders.jsp" role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false">
+							<div class="media align-items-center">
+							
+								<div class="media-body ml-2 d-none d-lg-block">
+								
+									<span class="mb-0 text-sm  font-weight-bold">Orders</span>
+								</div>
+							</div>
+					</a>
+					
+					</li>
+					<li class="nav-item dropdown"><a class="nav-link pr-0"
+						href="log-out" role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false">
+							<div class="media align-items-center">
+							
+								<div class="media-body ml-2 d-none d-lg-block">
+								
+									<span class="mb-0 text-sm  font-weight-bold">Logout</span>
+								</div>
+							</div>
+					</a>
+					
+					</li>
 				</ul>
 			</div>
 		</nav>
@@ -157,8 +185,7 @@ List<User> add = udao.getAllAddress(auth.getId());
 							<div class="text-center">
 
 								<div class="h5 font-weight-300">
-									<i class="ni location_pin mr-2"></i><%=city%>,
-									<%=state%>
+									<i class="ni location_pin mr-2"></i>
 								</div>
 								<div class="h5 mt-4"></div>
 								<div></div>
@@ -184,31 +211,31 @@ List<User> add = udao.getAllAddress(auth.getId());
 								<div class="pl-lg-4">
 									<div class="row">
 										<div class="col-md-12">
-											<label for="userUpd" class="form-control-label">Choose an
-												option:</label> <select name="userUpd" id="input-address">
+											<label for="userUpd" class="form-control-label">Choose
+												an option:</label> <select name="userUpd" id="input-address">
 												<option name="new">Update</option>
-												<option name="new">Delete</option>
+												<option name="del">Delete</option>
 											</select>
 										</div>
 									</div>
 								</div>
 
 								<div class="form-group focused">
-								
+
 									<div class="row">
 										<div class="col-lg-6">
 											<div class="form-group focused">
 
 												<label class="form-control-label" for="input-username">Email</label>
-												<input type="text" id="input-username" name="_email"
+												<input type="text" id="input-username" name="email"
 													class="form-control form-control-alternative"
-													placeholder="Email" value="">
+													placeholder="Email">
 											</div>
 										</div>
 										<div class="col-lg-6">
 											<div class="form-group">
 												<label class="form-control-label" for="input-email">Password
-													</label> <input type="password" id="input-email" name="_password"
+												</label> <input type="password" id="input-email" name="password"
 													class="form-control form-control-alternative"
 													placeholder="Password">
 											</div>
@@ -219,17 +246,19 @@ List<User> add = udao.getAllAddress(auth.getId());
 										<div class="col-lg-6">
 											<div class="form-group focused">
 												<label class="form-control-label" for="input-first-name">First
-													name</label> <input type="text" id="input-first-name" name="firstname"
+													name</label> <input type="text" id="input-first-name"
+													name="firstname"
 													class="form-control form-control-alternative"
-													placeholder="First name" value="">
+													placeholder="First name" >
 											</div>
 										</div>
 										<div class="col-lg-6">
 											<div class="form-group focused">
 												<label class="form-control-label" for="input-last-name">Last
-													name</label> <input type="text" id="input-last-name" name="lastname"
+													name</label> <input type="text" id="input-last-name"
+													name="lastname"
 													class="form-control form-control-alternative"
-													placeholder="Last name" value="">
+													placeholder="Last name">
 											</div>
 										</div>
 									</div>
@@ -338,7 +367,7 @@ List<User> add = udao.getAllAddress(auth.getId());
 													%>
 
 
-													<option name="existing"><%=c.getcName() + "'s card"%></option>
+													<option name="existing" value=<%=c.getcNo() %>><%=c.getcName() + "'s card"%></option>
 
 													<%
 													}

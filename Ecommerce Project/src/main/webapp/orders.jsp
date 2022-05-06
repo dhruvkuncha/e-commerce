@@ -29,46 +29,85 @@ if (cart_list != null) {
 <head>
 <title>Orders Page</title>
 <%@include file="includes/head.jsp"%>
+<%@include file="includes/navbar.jsp"%>
 </head>
 <body>
-	<%@include file="includes/navbar.jsp"%>
 
-	<div class="containter">
-		<div class="card-header my-3">All Orders</div>
-		<table class="table table-light">
-			<thead>
-				<tr>
-					<th scope="col">Date</th>
-					<th scope="col">Name</th>
-					<th scope="col">Rating</th>
-					<th scope="col">Quantity</th>
-					<th scope="col">Price</th>
-					<th scope="col">Cancel</th>
-				</tr>
-			</thead>
-			<tbody>
-				<%
-				if (orders != null) {
-					for (Order o : orders) {
-				%>
-				<tr>
-					<td><%=o.getDate()%></td>
-					<td><%=o.getName()%></td>
-					<td><%=o.getRating()%></td>
-					<td><%=o.getQuantity()%></td>
-					<td><%=dcf.format(o.getPrice()) %></td>
-					<td><a class="btn btn-sm btn-danger"
-						href="cancel-order?id=<%=o.getOrderId()%>">Cancel</a>
-				</tr>
-				<%}
-}
-%>
-			</tbody>
-		</table>
 
+
+	<link rel="stylesheet"
+		href="https://allyoucan.cloud/cdn/icofont/1.0.1/icofont.css"
+		integrity="sha384-jbCTJB16Q17718YM9U22iJkhuGbS0Gd2LjaWb4YJEZToOPmnKDjySVa323U+W7Fv"
+		crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="css/orders.css" />
+	<div class="container">
+		<div class="row">
+
+			<div class="col-md-9">
+				<div class="osahan-account-page-right shadow-sm bg-white p-4 h-100">
+					<div class="tab-content" id="myTabContent">
+						<div class="tab-pane  fade  active show" id="orders"
+							role="tabpanel" aria-labelledby="orders-tab">
+							<h4 class="font-weight-bold mt-0 mb-4">All Orders</h4>
+							<%
+							if (orders != null) {
+								for (Order o : orders) {
+							%>
+							<div class="bg-white card mb-4 order-list shadow-sm">
+								<div class="gold-members p-4">
+									<a href="#"> </a>
+									<div class="media">
+
+										<div class="media-body">
+											<h4 class="float-right text-info">
+												Order placed on
+												<%=o.getDate()%>
+												<i class="icofont-check-circled text-success"></i>
+											</h4>
+
+											<h6 class="mb-2">
+												<span class="text-black"><%=o.getName()%></span>
+											</h6>
+
+
+											<p class="text-gray mb-3">
+												<i class="icofont-list"></i>
+												<%=o.getRating()%>
+
+											</p>
+											<p class="text-dark"><%=o.getName()%>
+												x
+												<%=o.getQuantity()%></p>
+											<hr>
+											<div class="float-right">
+												<a class="btn btn-sm btn-outline-primary"
+													href="cancel-order?id=<%=o.getOrderId()%>"><i
+													class="icofont-headphone-alt"></i> Cancel</a> <a
+													class="btn btn-sm btn-primary" href="index.jsp"><i
+													class="icofont-refresh"></i> REORDER</a>
+											</div>
+											<p class="mb-0 text-black text-primary pt-2">
+												<span class="text-black font-weight-bold"> Total
+													Paid:</span> $
+												<%=o.getPrice()%>
+											</p>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<%
+							}
+							}
+							%>
+
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-
-
-	<%@include file="includes/footer.jsp"%>
 </body>
 </html>

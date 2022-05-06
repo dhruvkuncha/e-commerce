@@ -25,12 +25,9 @@ public class userUpdate extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String firstname = request.getParameter("firstname");
 		String lastname = request.getParameter("lastname");
-		String email = request.getParameter("_email");
-		String password = request.getParameter("_password");
-		String address = request.getParameter("address");
-		String city = request.getParameter("city");
-		String state = request.getParameter("state");
-		String zip = request.getParameter("zip");
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		
 		User userModel = new User(firstname, lastname, email, password);
 	
 
@@ -46,6 +43,8 @@ public class userUpdate extends HttpServlet {
 
 			}
 			if(action.equals("Delete") && regUser.userDelete(email)) {
+				
+				//System.out.println(email);
 				if(request.getSession().getAttribute("auth") != null) {
 				request.getSession().removeAttribute("auth");
 				response.sendRedirect("login.jsp");
