@@ -41,15 +41,37 @@ public class CheckOut extends HttpServlet {
 			ArrayList<Cart> cart_list = (ArrayList<Cart>) request.getSession().getAttribute("cart-list");
 			User auth = (User) request.getSession().getAttribute("auth");
 			String address = request.getParameter("add");
-			int cNo = Integer.parseInt(request.getParameter("mode"));
+			String add1 = request.getParameter("address");
+			String add2 = request.getParameter("city");
+			String add3 = request.getParameter("state");
+			String add4 = request.getParameter("zip");
+			String cNo = request.getParameter("mode");
+			String c1 = request.getParameter("cardnumber");
+			String c2 = request.getParameter("cardname");
+			String c3 = (String) request.getParameter("expmonth");
+			String c4 = request.getParameter("expyear");
+			String c5 = request.getParameter("cvv");
+			Double c6 = 0.0;
+			User userModel1 = new User(auth.getId(), add1, add2, add3, add4);
+			User userModel2 = new User(auth.getId(), c1, c2, c3, c5, c6);
 			
 			
 			
 			
 			if(cart_list != null && auth != null) {
 				OrderDao od = new OrderDao(DbCon.getConnection());
-				User a = od.getCard(cNo);
+				UserDao ud = new UserDao(DbCon.getConnection());
+				
+				if(address.equals("Add New") && ud.addressInsert(userModel1)) {
+					address = add1;
+				}
 				User u = od.getAddress(address);
+				
+				if(cNo.equals("Add New") && ud.cardInsert(userModel2)) {
+					cNo = c1;
+				}
+				
+				User a = od.getCard(Integer.parseInt(cNo));
 				
 				
 				
@@ -68,15 +90,21 @@ public class CheckOut extends HttpServlet {
 					if(!result) {
 						break;
 					}
+				
 	
-				}
+				//}
 				cart_list.clear();
 				response.sendRedirect("orders.jsp");
+				}
+				//else {
+				//	request.getSession().setAttribute("e", "notexist");
+				//}
 			}
 			else{
 				if(auth == null) response.sendRedirect("login.jsp");
 				response.sendRedirect("cart.jsp");
 			}
+		
 		}
 		catch(Exception e) {
 			e.printStackTrace();

@@ -93,7 +93,7 @@ if (cart_list != null) {
     <div class="container mt--8 pb-5">
       <div class="row justify-content-center">
         <div class="col-lg-5 col-md-7">
-          <div class="card bg-secondary shadow border-0">
+          <div class="card bg-secondary shadow border-0 bg-white">
             <div class="card-header bg-transparent pb-5">
               <div class="text-muted text-center mt-2 mb-3"><small>Sign in with</small></div>
               <div class="btn-wrapper text-center">
@@ -117,7 +117,7 @@ if (cart_list != null) {
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Email" type="email" name="login-email">
+                    <input class="form-control" style="background-color: #d3d3d3" placeholder="Email" type="email" name="login-email">
                   </div>
                 </div>
                 <div class="form-group">
@@ -125,7 +125,7 @@ if (cart_list != null) {
                     <div class="input-group-prepend">
                       <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                     </div>
-                    <input class="form-control" placeholder="Password" type="password" name="login-password">
+                    <input class="form-control" placeholder="Password" style="background-color: #d3d3d3" type="password" name="login-password">
                   </div>
                 </div>
                 <div class="custom-control custom-control-alternative custom-checkbox">

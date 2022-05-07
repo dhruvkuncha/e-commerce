@@ -27,6 +27,7 @@ public class userUpdate extends HttpServlet {
 		String lastname = request.getParameter("lastname");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		User u = (User)request.getSession().getAttribute("auth");
 		
 		User userModel = new User(firstname, lastname, email, password);
 	
@@ -42,7 +43,7 @@ public class userUpdate extends HttpServlet {
 			
 
 			}
-			if(action.equals("Delete") && regUser.userDelete(email)) {
+			if(action.equals("Delete") && regUser.userDelete(u.getEmail())) {
 				
 				//System.out.println(email);
 				if(request.getSession().getAttribute("auth") != null) {

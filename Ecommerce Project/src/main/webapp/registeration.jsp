@@ -30,10 +30,19 @@
 								<div class="form-group d-flex flex-row align-items-center mb-4">
 									<i class="fas fa-user fa-lg me-3 fa-fw"></i>
 									<div class="form-outline flex-fill mb-0">
-										<input type="text" class="form-control" name="name"
-											placeholder="Enter Your Name" required>
+										<input type="text" class="form-control" name="firstname"
+											placeholder="Enter Your First Name" required>
 									</div>
 								</div>
+								
+								<div class="form-group d-flex flex-row align-items-center mb-4">
+									<i class="fas fa-user fa-lg me-3 fa-fw"></i>
+									<div class="form-outline flex-fill mb-0">
+										<input type="text" class="form-control" name="lastname"
+											placeholder="Enter Your Last Name" required>
+									</div>
+								</div>
+								
 
 								<div class="form-group d-flex flex-row align-items-center mb-4">
 									<i class="fas fa-envelope fa-lg me-3 fa-fw"></i>

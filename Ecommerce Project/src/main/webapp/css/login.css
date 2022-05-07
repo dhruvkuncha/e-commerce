@@ -1,8 +1,3 @@
-Edit in JSFiddle
-Result
-HTML
-CSS
-JavaScript
 :root {
   --blue: #5e72e4;
   --indigo: #5603ad;
@@ -1800,4 +1795,4 @@ p {
 
 #navbar .navbar-toggler {
   pointer-events: none;
-}@charset "UTF-8";
+}
